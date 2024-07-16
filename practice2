@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    int queue[22], i, j, n, t, k, m, front, rear;
+    
+    while(scanf("%d%d%d", &n, &k ,&m) == 3 && n && m && k)
+{
+    
+    memset(queue, 0, sizeof(queue));
+    for(i=1; i<=n; ++i) queue[i] = i;
+    t = 0;
+    front = 0, rear = n;
+    while(t<n)
+    {
+        if(t) printf(",");
+        i = j = 0;
+        while(!queue[front]) {front++; front = front%n ? front%n : n;}
+        while(!queue[rear]) {rear--; rear = rear <= 0 ? n : rear;}
+             while(i<k)
+             {
+                 if(queue[(front = front%n? front%n: n)]) i++;
+                 if(i >= k) continue; 
+                 front = front%n+1;
+                  
+             }
+             while(j<m)
+             {
+                 if(queue[(rear = rear%n ? rear%n : n)]) j++;
+                 if(j >= m) continue;
+                 rear = rear - 1 ? rear - 1 : n;
+             }
+         printf("%3d", queue[front]); queue[front] = 0; t++;
+         if(front != rear) {printf("%3d", queue[rear]); queue[rear] = 0; t++;} 
+    }
+    printf("\n");
+    
+}
+    return 0;
+}
