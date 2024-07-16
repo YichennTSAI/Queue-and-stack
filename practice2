@@ -1,0 +1,59 @@
+#include<iostream>
+#include<stack>
+#include<queue>
+using namespace std;
+
+stack<int>s;
+queue<int>b;
+
+void fun(int N)
+{
+	int i,temp;
+	for(i=1;i<=N;i++)
+	{
+		s.push(i);//A站台的车厢入栈 
+		while(s.size()&&s.top()==b.front())
+		{
+			s.pop();
+			b.pop();
+		}
+	}
+}
+
+int main()
+{
+	int N,n,temp;
+	while(cin>>N)
+	{
+		if(N==0)
+		{
+			
+			break;
+		}
+		while(cin>>temp)
+		{
+			while(!s.empty())s.pop(); 
+        	while(!b.empty())b.pop();
+			if(temp==0)
+			{
+				cout<<endl;
+				break;
+			}
+			b.push(temp);
+			for(n=2;n<=N;n++)
+			{
+				cin>>temp;
+				b.push(temp);
+			}
+			fun(N);
+			if(s.size())
+			{
+				cout<<"No"<<endl;
+			}
+			else
+			{
+				cout<<"Yes"<<endl;
+			}
+		}
+	}
+}
