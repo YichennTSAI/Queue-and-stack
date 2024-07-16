@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+int main()
+{
+	int test_case;
+	cin >> test_case;
+	getchar();
+	while(test_case--)
+	{
+		bool counter = true;
+		string token;
+		stack<char> Stack;
+		getline(cin, token);
+		for (size_t i = 0; i < token.size()&&counter==true; i++)
+		{
+			if (token[i] == ')'&&!Stack.empty())
+			{
+				if (Stack.top() == '(')
+					Stack.pop();
+				else 
+				{
+					counter = false;
+					break;
+				}
+			}
+			else if (token[i] == ']'&& !Stack.empty())
+			{
+				if(Stack.top() == '[')
+					Stack.pop();
+				else
+				{
+					counter = false;
+					break;
+				}
+			}
+			else
+				Stack.push(token[i]);
+		}
+		if (Stack.empty())
+			cout << "Yes" << endl;
+		else
+			cout << "No" << endl;
+	}
+	return 0;
+}
