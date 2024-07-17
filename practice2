@@ -1,59 +1,25 @@
-#include<iostream>
-#include<stack>
-#include<queue>
+#include <iostream>
+#include <cstring>
 using namespace std;
-
-stack<int>s;
-queue<int>b;
-
-void fun(int N)
-{
-	int i,temp;
-	for(i=1;i<=N;i++)
-	{
-		s.push(i);//A站台的车厢入栈 
-		while(s.size()&&s.top()==b.front())
-		{
-			s.pop();
-			b.pop();
-		}
-	}
-}
-
-int main()
-{
-	int N,n,temp;
-	while(cin>>N)
-	{
-		if(N==0)
-		{
-			
-			break;
-		}
-		while(cin>>temp)
-		{
-			while(!s.empty())s.pop(); 
-        	while(!b.empty())b.pop();
-			if(temp==0)
-			{
-				cout<<endl;
-				break;
-			}
-			b.push(temp);
-			for(n=2;n<=N;n++)
-			{
-				cin>>temp;
-				b.push(temp);
-			}
-			fun(N);
-			if(s.size())
-			{
-				cout<<"No"<<endl;
-			}
-			else
-			{
-				cout<<"Yes"<<endl;
-			}
-		}
-	}
+ 
+int main() {
+    int N, R, x;
+    while (cin >> N >> R){
+        int a[N];
+        memset(a, 0, sizeof(a));
+        for (int i = 0; i < R; i++){
+            cin >> x;
+            a[x-1] = 1;
+        }
+        bool flag = true;
+        for (int i = 0; i < N; i++){
+            if (!a[i]) {
+                flag = false;
+                cout << i+1 << " ";
+            }
+        }
+        if (flag) cout << "*\n";
+        else cout << "\n";
+    }
+    return 0;
 }
